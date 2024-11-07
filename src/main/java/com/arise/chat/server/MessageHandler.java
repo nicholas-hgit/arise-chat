@@ -39,6 +39,8 @@ class MessageHandler implements Runnable{
         try(BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(),StandardCharsets.UTF_8))) {
 
+            out.write(getServerASCII());
+
             out.write("Enter username");
             out.newLine();
             out.flush();
@@ -94,5 +96,17 @@ class MessageHandler implements Runnable{
                 logger.error("FAILED TO BROADCAST WELCOME MESSAGE",e);
             }
         });
+
+    }
+
+    private static String getServerASCII(){
+        return """
+                   _____        .__              \s
+                  /  _  \\_______|__| ______ ____ \s
+                 /  /_\\  \\_  __ \\  |/  ___// __ \\\s
+                /    |    \\  | \\/  |\\___ \\\\  ___/\s
+                \\____|__  /__|  |__/____  >\\___  >
+                        \\/              \\/     \\/\s
+                """;
     }
 }
